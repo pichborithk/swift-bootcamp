@@ -9,9 +9,8 @@
 import Foundation
 
 class BaseENV {
-    
     let dict: NSDictionary
-    
+
     init(resourceName: String) {
         guard let filePath = Bundle.main.path(forResource: resourceName, ofType: "plist"), let plist = NSDictionary(contentsOfFile: filePath) else {
             fatalError("Couldn't find file '\(resourceName)' plist")
@@ -28,13 +27,13 @@ class DevENV: BaseENV, KEYSProtocol {
     init() {
         super.init(resourceName: "DEV-Keys")
     }
-    
+
     var OWM_API_KEY: String {
         dict.object(forKey: "OWM_API_KEY") as? String ?? ""
     }
 }
 
-//class DebugENV:BaseENV, KEYSProtocol {
+// class DebugENV:BaseENV, KEYSProtocol {
 //    init() {
 //        super.init(resourceName: "DEBUG-Keys")
 //    }
@@ -42,9 +41,9 @@ class DevENV: BaseENV, KEYSProtocol {
 //    var OWM_API_KEY: String {
 //        dict.object(forKey: "OWM_API_KEY") as? String ?? ""
 //    }
-//}
+// }
 //
-//class ProdENV:BaseENV, KEYSProtocol {
+// class ProdENV:BaseENV, KEYSProtocol {
 //    init() {
 //        super.init(resourceName: "PROD-Keys")
 //    }
@@ -52,4 +51,4 @@ class DevENV: BaseENV, KEYSProtocol {
 //    var OWM_API_KEY: String {
 //        dict.object(forKey: "OWM_API_KEY") as? String ?? ""
 //    }
-//}
+// }

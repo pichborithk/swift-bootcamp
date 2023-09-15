@@ -8,42 +8,59 @@
 
 import Foundation
 
+protocol WeatherManagerDelegate {
+    func didUpdateWeather(_ weatherMangaer: WeatherManager, weather: WeatherModel)
+    func didFailWIthError(error: Error)
+}
+
 struct WeatherManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?units=metric"
     let appId = "appid=\(ENV.OWM_API_KEY)"
     
+    var delegate: WeatherManagerDelegate?
+    
     func fetchWeather(cityName: String) {
         let urlString = "\(weatherURL)&\(appId)&q=\(cityName)"
         
-        performRequest(urlString: urlString)
+        performRequest(with: urlString)
     }
     
-    func parseJSON(weatherData: Data) {
+    func parseJSON(_ weatherData: Data) -> WeatherModel? {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
-            print(decodedData.main.temp)
-            print(decodedData.weather[0].description)
+            let id = decodedData.weather[0].id
+            let temp = decodedData.main.temp
+            let name = decodedData.name
+            let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
+            
+            return weather
+            
         } catch {
-            print(error)
+//            print(error)
+            delegate?.didFailWIthError(error: error)
+            return nil
         }
     }
     
-    func performRequest(urlString: String) {
+    func performRequest(with urlString: String) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             
             let task = session.dataTask(with: url) {
                 data, _, error in
                 if error != nil {
-                    print(error!)
+//                         print(error!)
+                    self.delegate?.didFailWIthError(error: error!)
                     return
                 }
                 
                 if let safeData = data {
-//                    let dataString = String(data: safeData, encoding: .utf8)
-//                    print(dataString ?? "")
-                    self.parseJSON(weatherData: safeData)
+//                   let dataString = String(data: safeData, encoding: .utf8)
+//                   print(dataString ?? "")
+                    if let weather = self.parseJSON(safeData) {
+                        self.delegate?.didUpdateWeather(self, weather: weather)
+                    }
                 }
             }
             
