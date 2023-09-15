@@ -26,9 +26,11 @@ let result4 = calculator(4, 2, operation: { (no1, no2) in return no1 - no2 })
 
 let result5 = calculator(2, 3, operation: { (no1, no2) in no1 + no2 })
 
-let result6 = calculator(2, 3, operation: { $0 * $1 })
+let result6 = calculator(4, 2, operation: { no1, no2 in no1 - no2 })
 
-let result7 = calculator(4, 2) { $0 / $1 }
+let result7 = calculator(2, 3, operation: { $0 * $1 })
+
+let result8 = calculator(4, 2) { $0 / $1 }
 
 let arrayOfNumbers2 = arrayOfNumbers1.map { $0 + 1 }
 
