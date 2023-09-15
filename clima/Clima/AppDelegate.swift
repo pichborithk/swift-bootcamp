@@ -35,3 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//var ENV: KEYSProtocol {
+//    #if DEBUG
+//    return DebugENV()
+//    #else
+//    return ProdENV()
+//    #endif
+//}
+
+var ENV: KEYSProtocol = DevENV()
+
+

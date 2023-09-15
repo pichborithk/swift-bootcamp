@@ -18,9 +18,8 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTextField.delegate = self
-        if let testEnv = ProcessInfo.processInfo.environment["test"]{
-            print(testEnv)
-        }
+//        print(ProcessInfo.processInfo.environment["TEST"]!)
+        print(ENV.TEST)
     }
 
     @IBAction func searchPressed(_ sender: UIButton) {
