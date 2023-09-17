@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Bitcoin View Controller-->
+        <!--Coin View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="BitcoinViewController" customModule="ByteCoin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CoinViewController" customModule="ByteCoin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5TP-yw-RBT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,7 +98,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bitcoinLabel" destination="N2a-Ax-iRV" id="eNl-3g-Ykf"/>
+                        <outlet property="coinRateLabel" destination="N2a-Ax-iRV" id="eNl-3g-Ykf"/>
                         <outlet property="currencyLabel" destination="MAn-y0-nXv" id="799-kT-2Go"/>
                         <outlet property="currencyPicker" destination="ct2-jk-pgH" id="zaI-AC-mw4"/>
                     </connections>

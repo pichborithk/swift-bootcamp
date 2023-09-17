@@ -1,5 +1,5 @@
 //
-//  BigcoinModel.swift
+//  BitcoinData.swift
 //  ByteCoin
 //
 //  Created by Pichborith Kong on 9/17/23.
@@ -8,10 +8,6 @@
 
 import Foundation
 
-struct BitcoinModel {
+struct CoinData: Codable {
     let rate: Double
-
-    var rateString: String {
-        return String(format: "%.2f", rate)
-    }
 }

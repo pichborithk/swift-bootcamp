@@ -11,7 +11,7 @@ import Foundation
 protocol CoinManagerDelegate {
     func didFailWithError(error: Error)
     
-    func didUpdateBitcoinInfo(_ coinManager: CoinManager, bitcoinInfo: BitcoinModel)
+    func didUpdateCoinInfo(_ coinManager: CoinManager, coinInfo: CoinModel)
 }
 
 struct CoinManager {
@@ -37,8 +37,8 @@ struct CoinManager {
                     return
                 }
                 if let safeData = data {
-                    if let bitcoinInfo = self.parseJSON(safeData) {
-                        self.delegate?.didUpdateBitcoinInfo(self, bitcoinInfo: bitcoinInfo)
+                    if let coinInfo = self.parseJSON(safeData) {
+                        self.delegate?.didUpdateCoinInfo(self, coinInfo: coinInfo)
                     }
                 }
             }
@@ -47,14 +47,14 @@ struct CoinManager {
         }
     }
     
-    func parseJSON(_ bitcoinData: Data) -> BitcoinModel? {
+    func parseJSON(_ coinData: Data) -> CoinModel? {
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(BitcoinData.self, from: bitcoinData)
+            let decodedData = try decoder.decode(CoinData.self, from: coinData)
             let rate = decodedData.rate
-            let bitcoinInfo = BitcoinModel(rate: rate)
+            let coinInfo = CoinModel(rate: rate)
             
-            return bitcoinInfo
+            return coinInfo
         } catch {
             delegate?.didFailWithError(error: error)
             return nil

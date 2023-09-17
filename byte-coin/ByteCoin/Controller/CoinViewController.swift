@@ -8,8 +8,8 @@
 
 import UIKit
 
-class BitcoinViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-    @IBOutlet var bitcoinLabel: UILabel!
+class CoinViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    @IBOutlet var coinRateLabel: UILabel!
     @IBOutlet var currencyLabel: UILabel!
     @IBOutlet var currencyPicker: UIPickerView!
 
@@ -39,18 +39,19 @@ class BitcoinViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 //        print(coinManager.currencyArray[row])
         coinManager.getCoinPrice(for: row)
+        currencyLabel.text = coinManager.currencyArray[row]
     }
 }
 
-// MARK: - BitcoinManagerDelegate
+// MARK: - CoinManagerDelegate
 
-extension BitcoinViewController: CoinManagerDelegate {
-    func didUpdateBitcoinInfo(_ coinManager: CoinManager, bitcoinInfo: BitcoinModel) {
+extension CoinViewController: CoinManagerDelegate {
+    func didUpdateCoinInfo(_ coinManager: CoinManager, coinInfo: CoinModel) {
         DispatchQueue.main.async {
-            self.bitcoinLabel.text = bitcoinInfo.rateString
+            self.coinRateLabel.text = coinInfo.rateString
         }
     }
-    
+
     func didFailWithError(error: Error) {
         print(error)
     }
