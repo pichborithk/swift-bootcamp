@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CoinViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class CoinViewController: UIViewController {
     @IBOutlet var coinRateLabel: UILabel!
     @IBOutlet var currencyLabel: UILabel!
     @IBOutlet var currencyPicker: UIPickerView!
@@ -23,24 +23,6 @@ class CoinViewController: UIViewController, UIPickerViewDataSource, UIPickerView
 
         coinManager.delegate = self
     }
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return coinManager.currencyArray.count
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return coinManager.currencyArray[row]
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        print(coinManager.currencyArray[row])
-        coinManager.getCoinPrice(for: row)
-        currencyLabel.text = coinManager.currencyArray[row]
-    }
 }
 
 // MARK: - CoinManagerDelegate
@@ -54,5 +36,31 @@ extension CoinViewController: CoinManagerDelegate {
 
     func didFailWithError(error: Error) {
         print(error)
+    }
+}
+
+// MARK: - UIPickerViewDataSource
+
+extension CoinViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return coinManager.currencyArray.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return coinManager.currencyArray[row]
+    }
+}
+
+// MARK: - UIPickerViewDelegate
+
+extension CoinViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        print(coinManager.currencyArray[row])
+        coinManager.getCoinPrice(for: row)
+        currencyLabel.text = coinManager.currencyArray[row]
     }
 }
