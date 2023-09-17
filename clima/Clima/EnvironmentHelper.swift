@@ -10,6 +10,10 @@ import Foundation
 
 class BaseENV {
     let dict: NSDictionary
+    
+    enum Keys: String {
+        case OWM_API_KEY
+    }
 
     init(resourceName: String) {
         guard let filePath = Bundle.main.path(forResource: resourceName, ofType: "plist"), let plist = NSDictionary(contentsOfFile: filePath) else {
@@ -29,7 +33,8 @@ class DevENV: BaseENV, KEYSProtocol {
     }
 
     var OWM_API_KEY: String {
-        dict.object(forKey: "OWM_API_KEY") as? String ?? ""
+//        dict.object(forKey: "OWM_API_KEY") as? String ?? ""
+        dict.object(forKey: Keys.OWM_API_KEY.rawValue) as? String ?? ""
     }
 }
 
