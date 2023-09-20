@@ -25,7 +25,7 @@ protocol KEYSProtocol {
 
 class DevENV: BaseENV, KEYSProtocol {
     init() {
-        super.init(resourceName: "DEV-Keys")
+        super.init(resourceName: "Keys-Info")
     }
 
     var COIN_API_KEY: String {

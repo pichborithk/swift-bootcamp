@@ -10,7 +10,7 @@ import Foundation
 
 class BaseENV {
     let dict: NSDictionary
-    
+
     enum Keys: String {
         case OWM_API_KEY
     }
@@ -29,7 +29,7 @@ protocol KEYSProtocol {
 
 class DevENV: BaseENV, KEYSProtocol {
     init() {
-        super.init(resourceName: "DEV-Keys")
+        super.init(resourceName: "Keys-Info")
     }
 
     var OWM_API_KEY: String {
