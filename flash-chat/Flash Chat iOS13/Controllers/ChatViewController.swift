@@ -7,17 +7,16 @@
 //
 
 import FirebaseAuth
+import FirebaseFirestore
 import UIKit
 
 class ChatViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var messageTextfield: UITextField!
 
-    var messages: [Message] = [
-        Message(sender: "1@2.com", body: "Hey"),
-        Message(sender: "1@3.com", body: "Hi"),
-        Message(sender: "1@2.com", body: "What's up?")
-    ]
+    let db = Firestore.firestore()
+
+    var messages: [Message] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +26,8 @@ class ChatViewController: UIViewController {
         navigationItem.hidesBackButton = true
 
         tableView.register(UINib(nibName: Constants.cellNibName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier)
+
+        loadMessages()
     }
 
     @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
@@ -38,7 +39,43 @@ class ChatViewController: UIViewController {
         }
     }
 
-    @IBAction func sendPressed(_ sender: UIButton) {}
+    @IBAction func sendPressed(_ sender: UIButton) {
+        if let messageBody = messageTextfield.text, let messageSender = Auth.auth().currentUser?.email {
+            db.collection(Constants.FStore.collectionName).addDocument(data: [Constants.FStore.senderField: messageSender, Constants.FStore.bodyField: messageBody]) { error in
+                if let e = error {
+                    print("There was an issue saving data to firestore, \(e)")
+                } else {
+                    print("Successfully saved data.")
+                    self.messageTextfield.text = ""
+                }
+            }
+        }
+    }
+
+    func loadMessages() {
+//        db.collectionGroup(Constants.FStore.collectionName).getDocuments { querySnapshot, error in
+        db.collectionGroup(Constants.FStore.collectionName).addSnapshotListener { querySnapshot, error in
+            if let e = error {
+                print("There was an issue retrieving data from firestore, \(e)")
+            } else {
+                if let snapShotDocuments = querySnapshot?.documents {
+                    self.messages = []
+
+                    for document in snapShotDocuments {
+                        let data = document.data()
+                        if let messageSender = data[Constants.FStore.senderField] as? String, let messageBody = data[Constants.FStore.bodyField] as? String {
+                            let newMessage = Message(sender: messageSender, body: messageBody)
+                            self.messages.append(newMessage)
+
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension ChatViewController: UITableViewDataSource {
