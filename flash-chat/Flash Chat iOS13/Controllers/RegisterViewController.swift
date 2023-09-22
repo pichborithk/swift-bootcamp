@@ -13,6 +13,12 @@ class RegisterViewController: UIViewController {
     @IBOutlet var emailTextfield: UITextField!
     @IBOutlet var passwordTextfield: UITextField!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        title = "Register"
+    }
+
     @IBAction func registerPressed(_ sender: UIButton) {
         if let email = emailTextfield.text,
            let password = passwordTextfield.text

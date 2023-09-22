@@ -14,7 +14,7 @@ class ChatViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var messageTextfield: UITextField!
 
-    let db = Firestore.firestore()
+    var db = Firestore.firestore()
 
     var messages: [Message] = []
 
@@ -52,7 +52,9 @@ class ChatViewController: UIViewController {
                     print("There was an issue saving data to firestore, \(e)")
                 } else {
                     print("Successfully saved data.")
-                    self.messageTextfield.text = ""
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                 }
             }
         }
@@ -63,13 +65,13 @@ class ChatViewController: UIViewController {
         db.collectionGroup(Constants.FStore.collectionName)
             .order(by: Constants.FStore.dateField)
             .addSnapshotListener { querySnapshot, error in
+                self.messages = []
+
                 if let e = error {
                     print("There was an issue retrieving data from firestore, \(e)")
 
                 } else {
                     if let snapShotDocuments = querySnapshot?.documents {
-                        self.messages = []
-
                         for document in snapShotDocuments {
                             let data = document.data()
                             if let messageSender = data[Constants.FStore.senderField] as? String,
@@ -80,6 +82,8 @@ class ChatViewController: UIViewController {
 
                                 DispatchQueue.main.async {
                                     self.tableView.reloadData()
+                                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                                    self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                                 }
                             }
                         }
@@ -95,8 +99,22 @@ extension ChatViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = messages[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! MessageCell
-        cell.label.text = messages[indexPath.row].body
+        cell.label.text = message.body
+
+        if message.sender == Auth.auth().currentUser?.email {
+            cell.leftImageView.isHidden = true
+            cell.rightImageView.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: Constants.BrandColors.lightPurple)
+            cell.label.textColor = UIColor(named: Constants.BrandColors.purple)
+        } else {
+            cell.leftImageView.isHidden = false
+            cell.rightImageView.isHidden = true
+            cell.messageBubble.backgroundColor = UIColor(named: Constants.BrandColors.purple)
+            cell.label.textColor = UIColor(named: Constants.BrandColors.lightPurple)
+        }
+
         return cell
     }
 }
