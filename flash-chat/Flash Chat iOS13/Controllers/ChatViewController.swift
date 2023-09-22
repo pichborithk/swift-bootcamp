@@ -40,8 +40,14 @@ class ChatViewController: UIViewController {
     }
 
     @IBAction func sendPressed(_ sender: UIButton) {
-        if let messageBody = messageTextfield.text, let messageSender = Auth.auth().currentUser?.email {
-            db.collection(Constants.FStore.collectionName).addDocument(data: [Constants.FStore.senderField: messageSender, Constants.FStore.bodyField: messageBody]) { error in
+        if let messageBody = messageTextfield.text,
+           let messageSender = Auth.auth().currentUser?.email
+        {
+            db.collection(Constants.FStore.collectionName).addDocument(data: [
+                Constants.FStore.senderField: messageSender,
+                Constants.FStore.bodyField: messageBody,
+                Constants.FStore.dateField: Date().timeIntervalSince1970,
+            ]) { error in
                 if let e = error {
                     print("There was an issue saving data to firestore, \(e)")
                 } else {
@@ -54,27 +60,32 @@ class ChatViewController: UIViewController {
 
     func loadMessages() {
 //        db.collectionGroup(Constants.FStore.collectionName).getDocuments { querySnapshot, error in
-        db.collectionGroup(Constants.FStore.collectionName).addSnapshotListener { querySnapshot, error in
-            if let e = error {
-                print("There was an issue retrieving data from firestore, \(e)")
-            } else {
-                if let snapShotDocuments = querySnapshot?.documents {
-                    self.messages = []
+        db.collectionGroup(Constants.FStore.collectionName)
+            .order(by: Constants.FStore.dateField)
+            .addSnapshotListener { querySnapshot, error in
+                if let e = error {
+                    print("There was an issue retrieving data from firestore, \(e)")
 
-                    for document in snapShotDocuments {
-                        let data = document.data()
-                        if let messageSender = data[Constants.FStore.senderField] as? String, let messageBody = data[Constants.FStore.bodyField] as? String {
-                            let newMessage = Message(sender: messageSender, body: messageBody)
-                            self.messages.append(newMessage)
+                } else {
+                    if let snapShotDocuments = querySnapshot?.documents {
+                        self.messages = []
 
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
+                        for document in snapShotDocuments {
+                            let data = document.data()
+                            if let messageSender = data[Constants.FStore.senderField] as? String,
+                               let messageBody = data[Constants.FStore.bodyField] as? String
+                            {
+                                let newMessage = Message(sender: messageSender, body: messageBody)
+                                self.messages.append(newMessage)
+
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
                             }
                         }
                     }
                 }
             }
-        }
     }
 }
 
