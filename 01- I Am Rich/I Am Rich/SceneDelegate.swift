@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  I am Rich
+//  I Am Rich
 //
-//  Created by Pichborith Kong on 7/17/23.
+//  Created by Pichborith Kong on 3/23/24.
 //
 
 import UIKit
