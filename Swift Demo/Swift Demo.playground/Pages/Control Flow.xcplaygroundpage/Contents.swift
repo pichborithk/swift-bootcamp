@@ -1,3 +1,6 @@
+// Control Flow Concepts Demonstration
+
+// 1. If Statement
 let a = 1
 
 if a < 1 {
@@ -18,6 +21,7 @@ if a > 0 || a < 1 {
     print("equal")
 }
 
+// 2. Switch Statement
 switch a {
 case 7 ... 9:
     print("a")
@@ -30,3 +34,15 @@ case ...2:
 default:
     print("e")
 }
+
+// 3. Guard Statement
+func greet(person: [String: String]) {
+    guard let name = person["name"] else {
+        print("Name not found")
+        return
+    }
+    print("Hello, \(name)!")
+}
+
+greet(person: ["name": "John"])
+greet(person: [:])
