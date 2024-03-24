@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' buildActiveScheme='true' importAppTypes='true'>
+    <pages>
+        <page name='Classes and Inheritance'/>
+        <page name='Closures'/>
+        <page name='Control Flow'/>
+        <page name='Data Types'/>
+        <page name='Defining and Unwrapping Optionals'/>
+        <page name='Error Handling'/>
+        <page name='Extensions'/>
+        <page name='Functions'/>
+        <page name='Loops'/>
+        <page name='Protocols'/>
+        <page name='Protocols and Delegates'/>
+        <page name='Range Operator'/>
+        <page name='Structures'/>
+        <page name='Type Casting'/>
+    </pages>
+</playground>
