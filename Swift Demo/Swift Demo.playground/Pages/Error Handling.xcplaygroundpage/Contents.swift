@@ -1,25 +1,78 @@
-import UIKit
+// Error Handling Concepts Demonstration
 
-enum DivisionError: Error {
-    case dividedByZero
+// 1. Define an Error Type
+
+enum CustomError: Error {
+    case invalidInput
+    case outOfBounds
 }
 
-// create throwing function using throws keyword
-func division(numerator: Int, denominator: Int) throws {
+// 2. Function that Throws an Error
+
+func divide(numerator: Int, denominator: Int) throws -> Int {
     // throw error if divide by 0
-    if denominator == 0 {
-        throw DivisionError.dividedByZero
-    } else {
-        print(Double(denominator) / Double(numerator))
+    /*
+     if denominator == 0 {
+     throw CustomError.invalidInput
+     } else {
+     return numerator / denominator
+     }
+     */
+    
+    guard denominator != 0 else {
+        throw CustomError.invalidInput
     }
+    
+    return numerator / denominator
+}
+
+// 3. Handling Errors with Do-Catch
+
+do {
+    let result = try divide(numerator: 10, denominator: 2)
+    print("Result of division:", result)
+} catch CustomError.invalidInput {
+    print("Invalid input: Division by zero is not allowed.")
+} catch {
+    print("An unknown error occurred.")
 }
 
 do {
-    try division(numerator: 10, denominator: 0)
-} catch DivisionError.dividedByZero {
-    print("Error: Denominator cannot be 0")
+    let result = try divide(numerator: 10, denominator: 0)
+    print("Result of division:", result)
+} catch CustomError.invalidInput {
+    print("Invalid input: Division by zero is not allowed.")
+} catch {
+    print("An unknown error occurred.")
 }
 
-// Disable Error Handling
+// 4. Handling Errors with Optional Try
 
-try! division(numerator: 10, denominator: 5)
+if let result = try? divide(numerator: 10, denominator: 2) {
+    print("Result of division:", result)
+} else {
+    print("An error occurred.")
+}
+
+if let result = try? divide(numerator: 10, denominator: 0) {
+    print("Result of division:", result)
+} else {
+    print("An error occurred.")
+}
+
+// 5. Propagating Errors
+
+func propagateError() throws {
+    let result = try divide(numerator: 10, denominator: 0)
+    print("Result of division:", result)
+}
+
+do {
+    try propagateError()
+} catch {
+    print("Error propagated:", error)
+}
+
+// 6. Disable Error Handling
+
+try! divide(numerator: 10, denominator: 5)
