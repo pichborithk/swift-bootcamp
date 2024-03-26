@@ -1,63 +1,70 @@
-class Enemy {
-    var health = 100
-    var attackStrength: Int
-    
-    init(attackStrength: Int) {
-        self.attackStrength = attackStrength
-    }
-    
-    func takeDamage(amount: Int) {
-        health = health - amount
-    }
-    
-    func attack() {
-        print("Land a hit, does \(attackStrength) damages.")
-    }
-    
-    func scream() {
-        print("Waaaaaaaaa.....")
-    }
-}
+// Class with Inheritance Concepts Demonstration
 
-class Dragon: Enemy {
-    var color: String
-    
-    init(attackStrength: Int, color: String) {
-        self.color = color
-        super.init(attackStrength: attackStrength)
+// 1. Define a Base Class
+public class Person {
+    // Properties
+    public var name: String
+    public var age: Int
+    private var address: String
+
+    // Computed Property
+    public var description: String {
+        return "\(name) is \(age) years old and lives at \(address)."
     }
-    
-    override func scream() {
-        print("Grrrrrr......")
+
+    // Initializer
+    public init(name: String, age: Int, address: String) {
+        self.name = name
+        self.age = age
+        self.address = address
     }
-    
-    override func attack() {
-        print("Spits fire")
-        super.attack()
+
+    // Method
+    public func introduce() {
+        print("Hello, my name is \(name) and I am \(age) years old.")
     }
-    
-    func fly() {
-        print("See ya......")
+
+    // Public Method to update address
+    public func updateAddress(newAddress: String) {
+        address = newAddress
     }
 }
 
-let skeleton = Enemy(attackStrength: 10)
-skeleton.scream()
-skeleton.attack()
+// 2. Define a Derived Class (Employee) Inheriting from Base Class (Person)
+public class Employee: Person {
+    // Additional Property
+    public var employeeID: String
 
+    // Initializer
+    public init(name: String, age: Int, address: String, employeeID: String) {
+        self.employeeID = employeeID
+        super.init(name: name, age: age, address: address)
+    }
 
-let dragon = Dragon(attackStrength: 20, color: "red")
-dragon.scream()
-dragon.attack()
-dragon.fly()
+    // Overriding Method
+    override public func introduce() {
+        print("Hello, my name is \(name), I am \(age) years old, and my employee ID is \(employeeID).")
+    }
+}
 
-let skeleton1 = Enemy(attackStrength: 5)
-skeleton1.takeDamage(amount: 10)
-let skeleton2 = skeleton1
+// 3. Create Instances of the Derived Class
+let person1 = Person(name: "John", age: 30, address: "123 Main St")
+let employee1 = Employee(name: "Jane", age: 25, address: "456 Elm St", employeeID: "E12345")
 
-skeleton2.takeDamage(amount: 10)
-skeleton1.takeDamage(amount: 10)
+// 4. Access Properties and Call Methods
+print("Person 1:", person1.description)
+print("Employee 1:", employee1.description)
 
-print(skeleton1.health)
-print(skeleton2.health)
+person1.introduce()
+employee1.introduce()
 
+// 5. Modify Properties
+var employee2 = employee1
+employee2.name = "Alice"
+employee2.age = 28
+employee2.updateAddress(newAddress: "789 Oak St")
+
+print("Employee 2:", employee2.description)
+
+// 6. Classes are Reference Types
+print("Employee 1:", employee1.description)

@@ -31,7 +31,7 @@ public struct Person {
         count += 1
     }
 
-    // Initializer
+    // Initializer (initialize is not require in structure)
     public init(name: String, age: Int, address: String) {
         self.name = name
         self.age = age
