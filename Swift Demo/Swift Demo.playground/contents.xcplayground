@@ -6,7 +6,6 @@
         <page name='Closures'/>
         <page name='Control Flow'/>
         <page name='Data Types'/>
-        <page name='Defining and Unwrapping Optionals'/>
         <page name='Dictionaries'/>
         <page name='Error Handling'/>
         <page name='Extensions'/>
@@ -15,8 +14,10 @@
         <page name='Protocols'/>
         <page name='Protocols and Delegates'/>
         <page name='Range Operator'/>
+        <page name='Strings'/>
         <page name='Structures'/>
         <page name='Type Casting'/>
         <page name='Tuples'/>
+        <page name='Optional Handling'/>
     </pages>
 </playground>
