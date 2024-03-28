@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7EB22CF52AB782AA00ED73F8 /* EnvironmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB22CF42AB782AA00ED73F8 /* EnvironmentHelper.swift */; };
-		7EB22CF72AB7853D00ED73F8 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB22CF62AB7853D00ED73F8 /* CoinModel.swift */; };
-		7EB22CF92AB7875000ED73F8 /* CoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB22CF82AB7875000ED73F8 /* CoinData.swift */; };
-		7EB22CFB2AB78B0400ED73F8 /* Keys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB22CFA2AB78B0400ED73F8 /* Keys-Info.plist */; };
+		7E14FA0A2BB51B3A00D68394 /* Keys-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E14FA092BB51B3A00D68394 /* Keys-Info.plist */; };
+		7E14FA0C2BB51D9E00D68394 /* EnvironmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E14FA0B2BB51D9E00D68394 /* EnvironmentHelper.swift */; };
+		7E14FA0E2BB5278D00D68394 /* CoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E14FA0D2BB5278D00D68394 /* CoinData.swift */; };
 		ADA8AC092329367100626376 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA8AC082329367100626376 /* AppDelegate.swift */; };
 		ADA8AC0B2329367100626376 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA8AC0A2329367100626376 /* SceneDelegate.swift */; };
-		ADA8AC0D2329367100626376 /* CoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA8AC0C2329367100626376 /* CoinViewController.swift */; };
+		ADA8AC0D2329367100626376 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA8AC0C2329367100626376 /* ViewController.swift */; };
 		ADA8AC102329367100626376 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA8AC0E2329367100626376 /* Main.storyboard */; };
 		ADA8AC122329367300626376 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA8AC112329367300626376 /* Assets.xcassets */; };
 		ADA8AC152329367300626376 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA8AC132329367300626376 /* LaunchScreen.storyboard */; };
@@ -21,14 +20,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7EB22CF42AB782AA00ED73F8 /* EnvironmentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentHelper.swift; sourceTree = "<group>"; };
-		7EB22CF62AB7853D00ED73F8 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
-		7EB22CF82AB7875000ED73F8 /* CoinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinData.swift; sourceTree = "<group>"; };
-		7EB22CFA2AB78B0400ED73F8 /* Keys-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Keys-Info.plist"; sourceTree = "<group>"; };
+		7E14FA092BB51B3A00D68394 /* Keys-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Keys-Info.plist"; sourceTree = "<group>"; };
+		7E14FA0B2BB51D9E00D68394 /* EnvironmentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentHelper.swift; sourceTree = "<group>"; };
+		7E14FA0D2BB5278D00D68394 /* CoinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinData.swift; sourceTree = "<group>"; };
 		ADA8AC052329367100626376 /* ByteCoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByteCoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA8AC082329367100626376 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADA8AC0A2329367100626376 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ADA8AC0C2329367100626376 /* CoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinViewController.swift; sourceTree = "<group>"; };
+		ADA8AC0C2329367100626376 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ADA8AC0F2329367100626376 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ADA8AC112329367300626376 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADA8AC142329367300626376 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,16 +64,16 @@
 		ADA8AC072329367100626376 /* ByteCoin */ = {
 			isa = PBXGroup;
 			children = (
-				ADA8AC1D2329370700626376 /* Controller */,
-				ADA8AC1E2329370F00626376 /* Model */,
-				ADA8AC1C232936FE00626376 /* View */,
 				ADA8AC082329367100626376 /* AppDelegate.swift */,
-				7EB22CF42AB782AA00ED73F8 /* EnvironmentHelper.swift */,
 				ADA8AC0A2329367100626376 /* SceneDelegate.swift */,
+				7E14FA0B2BB51D9E00D68394 /* EnvironmentHelper.swift */,
+				ADA8AC1E2329370F00626376 /* Model */,
+				ADA8AC1D2329370700626376 /* Controller */,
+				ADA8AC1C232936FE00626376 /* View */,
 				ADA8AC112329367300626376 /* Assets.xcassets */,
 				ADA8AC132329367300626376 /* LaunchScreen.storyboard */,
 				ADA8AC162329367300626376 /* Info.plist */,
-				7EB22CFA2AB78B0400ED73F8 /* Keys-Info.plist */,
+				7E14FA092BB51B3A00D68394 /* Keys-Info.plist */,
 			);
 			path = ByteCoin;
 			sourceTree = "<group>";
@@ -91,7 +89,7 @@
 		ADA8AC1D2329370700626376 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				ADA8AC0C2329367100626376 /* CoinViewController.swift */,
+				ADA8AC0C2329367100626376 /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -100,8 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				ADA8AC1F2329398300626376 /* CoinManager.swift */,
-				7EB22CF62AB7853D00ED73F8 /* CoinModel.swift */,
-				7EB22CF82AB7875000ED73F8 /* CoinData.swift */,
+				7E14FA0D2BB5278D00D68394 /* CoinData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,9 +161,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EB22CFB2AB78B0400ED73F8 /* Keys-Info.plist in Resources */,
 				ADA8AC152329367300626376 /* LaunchScreen.storyboard in Resources */,
 				ADA8AC122329367300626376 /* Assets.xcassets in Resources */,
+				7E14FA0A2BB51B3A00D68394 /* Keys-Info.plist in Resources */,
 				ADA8AC102329367100626376 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,12 +175,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EB22CF92AB7875000ED73F8 /* CoinData.swift in Sources */,
+				7E14FA0E2BB5278D00D68394 /* CoinData.swift in Sources */,
 				ADA8AC202329398300626376 /* CoinManager.swift in Sources */,
-				ADA8AC0D2329367100626376 /* CoinViewController.swift in Sources */,
+				ADA8AC0D2329367100626376 /* ViewController.swift in Sources */,
 				ADA8AC092329367100626376 /* AppDelegate.swift in Sources */,
-				7EB22CF72AB7853D00ED73F8 /* CoinModel.swift in Sources */,
-				7EB22CF52AB782AA00ED73F8 /* EnvironmentHelper.swift in Sources */,
+				7E14FA0C2BB51D9E00D68394 /* EnvironmentHelper.swift in Sources */,
 				ADA8AC0B2329367100626376 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,7 +331,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "co.qrecca.byte-coin";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.qrecca.ByteCoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -353,7 +349,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "co.qrecca.byte-coin";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.qrecca.ByteCoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
