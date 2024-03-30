@@ -18,13 +18,47 @@ if optionalName != nil {
 }
 
 // 3. Optional Binding
-optionalName = "Jane"
+let optionalString: String? = "Hello, World!"
+let optionalNumber: Int? = Int("123")
+let optionalArray: [Int]? = [1, 2, 3]
 
-if let name = optionalName {
-    print("Optional Binding - Name:", name)
+// 3.1. Using if let for Optional Binding
+if let unwrappedString = optionalString {
+    print("if let - Unwrapped String:", unwrappedString)
 } else {
-    print("Name is nil")
+    print("if let - Optional String is nil")
 }
+
+// 3.2. Using guard let for Optional Binding
+func printNumber() {
+    guard let unwrappedNumber = optionalNumber else {
+        print("guard let - Optional Number is nil")
+        return
+    }
+    print("guard let - Unwrapped Number:", unwrappedNumber)
+}
+
+printNumber()
+
+// 3.3. Using if let with Multiple Optional Bindings
+if let unwrappedString = optionalString,
+   let unwrappedNumber = optionalNumber {
+    print("if let - Unwrapped String:", unwrappedString)
+    print("if let - Unwrapped Number:", unwrappedNumber)
+} else {
+    print("if let - One or both optionals are nil")
+}
+
+// 3.4. Using guard let with Multiple Optional Bindings
+func printArray() {
+    guard let unwrappedArray = optionalArray, !unwrappedArray.isEmpty else {
+        print("guard let - Optional Array is nil or empty")
+        return
+    }
+    print("guard let - Unwrapped Array:", unwrappedArray)
+}
+
+printArray()
 
 // 4. Nil Coalescing Operator
 
