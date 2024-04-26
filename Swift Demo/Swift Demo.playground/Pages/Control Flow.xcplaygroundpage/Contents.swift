@@ -46,3 +46,15 @@ func greet(person: [String: String]) {
 
 greet(person: ["name": "John"])
 greet(person: [:])
+
+// 4. Ternary Operator
+
+let number = 10
+let result = number % 2 == 0 ? "Even" : "Odd"
+print(result)  // Output: Even
+
+// 4.1 Ternary Operator (Multiple Conditions)
+
+let age = 20
+let status = age >= 18 ? "Adult" : age >= 13 ? "Teenager" : "Child"
+print(status)  // Output: Adult
