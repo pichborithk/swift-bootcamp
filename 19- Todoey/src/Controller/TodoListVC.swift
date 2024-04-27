@@ -31,7 +31,6 @@ class TodoListVC: UITableViewController {
         //        if let items = UserDefaults.standard.array(forKey: "TodoListArray") as? [Item] {
         //            itemArray = items
         //        }
-        
         loadItems()
     }
     
@@ -51,23 +50,25 @@ class TodoListVC: UITableViewController {
         }
     }
     
-    func loadItems() {
-        //        if let data = try? Data(contentsOf: dataFilePath!) {
-        //            let decoder = PropertyListDecoder()
-        //            do {
-        //                itemArray = try decoder.decode([Item].self, from: data)
-        //            } catch {
-        //                print("Error decoding item array, \(error)")
-        //            }
-        //
-        //        }
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+//    func loadItems() {
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//            do {
+//                itemArray = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print("Error decoding item array, \(error)")
+//            }
+//        }
+//    }
+    
+    func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()) {
         do {
             itemArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
         }
         
+        tableView.reloadData()
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -97,7 +98,7 @@ class TodoListVC: UITableViewController {
 }
 
 
-// MARK: - Datasource Methods
+// MARK: - Table View Datasource Methods
 
 extension TodoListVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,7 +118,7 @@ extension TodoListVC {
 }
 
 
-// MARK: - Delegate Methods
+// MARK: - Table View Delegate Methods
 
 extension TodoListVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -130,5 +131,33 @@ extension TodoListVC {
         tableView.deselectRow(at: indexPath, animated: true)
         
         
+    }
+}
+
+
+// MARK: - Search Bar Delegate Methods
+
+extension TodoListVC : UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        
+        //        request.sortDescriptors = [sortDescriptor]
+        request.sortDescriptors?.append(sortDescriptor)
+        
+        loadItems(with: request)
+ 
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
     }
 }
