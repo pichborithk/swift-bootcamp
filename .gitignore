@@ -1,6 +1,7 @@
 /resources
 .DS_Store
 .env
+Icon?
 
 *-Info.plist
 
